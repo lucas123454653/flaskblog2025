@@ -31,10 +31,10 @@ def create_app():
         db.create_all()
 
     login_manager = LoginManager()
-    LoginManager.login_view = "auth.login"
-    LoginManager.init_app(app)
+    login_manager.login_view = "auth.login"
+    login_manager.init_app(app)
 
-    @LoginManager.user_loader
+    @login_manager.user_loader
     def load_user(id):
         return User.query.get(int(id))
 
