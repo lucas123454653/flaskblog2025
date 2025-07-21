@@ -1,2 +1,40 @@
+<!-- page extends to template.html -->
 {% extends "template.html" %} {% block title %} Signup {% endblock %}
-{% block content %} Signup {% endblock %}
+<!-- sign up page content -->
+{% block content %}
+<!-- start of form -->
+<form method="POST">
+    <h3>Signup</h3>
+
+    <div class="form group">
+        <!-- email form -->
+         <label for="email">Email Address</label>
+         <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email" />
+        <br/>
+        <!-- Username form -->
+         <label for="username">Username</label>
+         <input type="text" id="username" name="username" class="form-control" placeholder="Enter Username" />
+        <br/>
+        <!-- password1 form -->
+         <label for="password1">Password</label>
+         <input type="password" id="password1" name="password1" class="form-control" placeholder="Enter Password" />
+        <div id="passwordHelpBlock" class="form-text">
+            Your password must be 8-20 characyers long.
+        </div>
+        <br/>
+        <!-- password2 form -->
+         <label for="password2">Password</label>
+         <input type="password" id="password2" name="password2" class="form-control" placeholder="Confirm Password" />
+        <br/>
+        <!-- submit button -->
+         <div align="center">
+            <button class="btn btn-primary" type="submit">Sign Up</button>
+         </div>
+
+
+    </div>
+
+</form>
+
+
+{% endblock %}
