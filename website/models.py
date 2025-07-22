@@ -1,5 +1,4 @@
 from . import db
-
 from sqlalchemy.sql import func
 from flask_login import UserMixin
 
@@ -22,7 +21,7 @@ class User(db.Model, UserMixin):
 # database model for blog post
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(150), unique=False)
+    title = db.Column(db.String(150), unique=True)
     content = db.Column(db.Text, nullable=False)
     date_created = db.Column(db.DateTime(timezone=True), default=func.now())
     author = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE"), nullable=False)
@@ -30,17 +29,17 @@ class Post(db.Model):
     likes = db.relationship('Like', backref='post', passive_deletes=True)
 
 
-    
-    
-# database model for blog comment  
+
+
+#database model for blog comment
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String(200), unique=False)
     date_created = db.Column(db.DateTime(timezone=True), default=func.now())
     author = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE"), nullable=False)
     post_id = db.Column(db.Integer, db.ForeignKey('post.id', ondelete="CASCADE"), nullable=False)
-    
-    
+
+
 
 
 # database model for comment like
