@@ -29,7 +29,8 @@ def home():
 # home route function
 # returns home.html
 def blog():
-    posts = Post.query.order_by(Post.date_created.desc())
+    page = request.args.get('page', 1, type=int)
+    posts = Post.query.order_by(Post.date_created.desc()).paginate(page=page, per_page=4)
     return render_template("blog.html", user=current_user, posts=posts)
 
 
@@ -132,7 +133,7 @@ def delete_comment(comment_id):
 @login_required
 def like(post_id):
     post = Post.query.filter_by(id=post_id).first()
-    like = Like.query.filter_by(author=current_user.id, post=post_id).first
+    like = Like.query.filter_by(author=current_user.id, post=post_id).first()
     if not post:
         return jsonify({'error': 'Post does not exist.'}, 400)
     elif like:
