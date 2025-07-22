@@ -11,15 +11,15 @@
             <a href="/posts/{{post.user.username}}">{{post.user.username}}</a>
            
             <!-- start of likes section -->
-            <!-- start of likes div -->   
+            <!-- start of likes div-->
             <div>
                 <span id="likes-count-{{post.id}}">{{ post.likes|length }}</span>
                 {% if user.id in post.likes|map(attribute="author")|list %}
                 <i class="fas fa-thumbs-up" id="like-button-{{post.id}}" onclick="like({{post.id}})"></i>
-                {%else%}
+                {% else %}
                 <i class="far fa-thumbs-up" id="like-button-{{post.id}}" onclick="like({{post.id}})"></i>
-                {%endif%}
-                    <!-- end of likes section -->
+                {% endif %}
+                    <!-- end of likes section-->
 
                     <!-- start of the delete drop down menu-->
                     {% if user.id == post.author %}

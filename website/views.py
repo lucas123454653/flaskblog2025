@@ -1,11 +1,14 @@
 from flask_login import login_user, logout_user, login_required, current_user
 
 # import external libraries
-from flask import Blueprint, render_template, request, flash, redirect, url_for
+from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify
+
 #import database
 from . import db
+
 # import from .models user
-from .models import User, Post, Comment
+from .models import User, Post, Comment, Like
+
 # set views blueprint
 views = Blueprint("views", __name__)
 
@@ -104,6 +107,7 @@ def create_comment(post_id):
     return redirect(url_for("views.blog"))
 
 
+
 # delete comment post route
 @views.route("/delete-comment/<comment_id>")
 #user must be logged in to post
@@ -119,3 +123,24 @@ def delete_comment(comment_id):
         db.session.commit()
         flash('Comment deleted!', category='success')
     return redirect(url_for('views.blog'))
+
+
+
+# like comment route
+@views.route("/like-post/<post_id>", methods=['POST'])
+#user must be logged in to post
+@login_required
+def like(post_id):
+    post = Post.query.filter_by(id=post_id).first()
+    like = Like.query.filter_by(author=current_user.id, post=post_id).first
+    if not post:
+        return jsonify({'error': 'Post does not exist.'}, 400)
+    elif like:
+        db.session.delete(like)
+        db.session.commit()
+    else: 
+        like = Like(author=current_user.id, post_id=post_id)
+        db.session.add(like)
+        db.session.commit()
+
+    return jsonify({"likes": len(post.likes), "liked": current_user.id in map(lambda x: x.author, post.likes)})
