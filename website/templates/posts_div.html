@@ -1,0 +1,37 @@
+<!-- page extends to template.html -->
+{% extends "template.html" %} {% block title %} Home {% endblock %}
+
+<!-- Post page content -->
+{% block content %} 
+<h1>Blog Posts</h1> 
+<div id="posts">
+    {% for post in posts %}
+    <div class="card border-dark">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <a href="/posts/{{post.user.username}}">{{post.user.username}}</a>
+        </div>
+        <div class="card-body">
+            <div class="card-text">{{post.title}}</div>
+        </div>
+        <div class="card-body">
+            <div class="card-text">{{post.content}}</div>
+        </div>
+        <div class="card-footer text-muted">{{post.date_created}}</div>
+    </div>
+    <br/>
+    {% endfor %}
+</div>
+{% block footer %}
+<div align="center">
+    <a href="/create-post">
+        <button type="button" class="btn btn-primary btn-large">
+            Create Post
+        </button>
+    </a>
+</div>
+<br />
+{% endblock %}
+{% endblock %}
+
+
+

@@ -1,23 +1,27 @@
 <!-- page extends to template.html -->
 {% extends "template.html" %} {% block title %} Create Post {% endblock %}
-
 <!-- login page content -->
 {% block content %}
-<h1> Make a Post</h1>
+
+    <h1 align="Center"> Make a Post</h1>
 
     <form method="POST">
         <!-- blog title form -->
-        <label for="title">Title</label>
-        <input type="text" id="title" name="title" class="form-control" placeholder="Blog Title" />
+        <label for="title">Post Title</label>
+        <input type="text" id="title" name="title" class="form-control" placeholder="Enter Title" />
         <br/>
         <!-- blog content text area -->
+         <label for="title">Post Content</label>
         <textarea name="content" id="content" class="form-control"></textarea>
-    </form>
+
+
     <br/>
     <!-- submit button -->
     <div align="center">
         <button class="btn btn-primary" type="Post">Post</button>
     </div>
+
+</form>
 
 {% endblock %}
 

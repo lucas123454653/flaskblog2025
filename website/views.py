@@ -18,26 +18,35 @@ def home():
     return render_template("home.html", user=current_user)
 
 
+# blog page route
+@views.route("/blog")
+#user must be logged in to post
+@login_required
+# home route function
+# returns home.html
+def blog():
+    posts = Post.query.all()
+    return render_template("blog.html", user=current_user, posts=posts)
+
+
 # create blog post route
 @views.route("/create-post", methods=['GET','POST'])
+#user must be logged in to post
 @login_required
-# create blog post route function
-# returns create_post.html
 def create_post():
     if request.method == "POST":
         title = request.form.get('title')
         content = request.form.get('content')
-        
         if not title:
-            flash('Title cannot be empty.')
+            flash("Title cannot be empty.", category="error")
         elif not content:
-            flash('Blog cannot be empty.')
+            flash("Blog cannot be empty.", category="error")
         else:
-            post = User(title=title, content=content, author=current_user.id)
+            post = Post(title=title, content=content, author=current_user.id)
             db.session.add(post)
             db.session.commit()
             flash('Post created!', category='success')
-            return redirect(url_for('views.home'))
+            return redirect(url_for('views.blog'))
 
         
 
