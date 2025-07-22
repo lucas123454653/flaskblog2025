@@ -135,7 +135,7 @@ def delete_comment(comment_id):
 @login_required
 def like(post_id):
     post = Post.query.filter_by(id=post_id).first()
-    like = Like.query.filter_by(author=current_user.id, post=post_id).first()
+    like = Like.query.filter_by(author=current_user.id, post_id=post_id).first()
     if not post:
         return jsonify({'error': 'Post does not exist.'}, 400)
     elif like:
