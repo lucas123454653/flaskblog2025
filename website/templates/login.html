@@ -1,4 +1,27 @@
+
 <!-- page extends to template.html -->
 {% extends "template.html" %} {% block title %} Login {% endblock %}
 <!-- login page content -->
-{% block content %}  Login {%endblock %}
+{% block content %}
+<!-- start of form -->
+<form method="POST">
+    <h3>Login</h3>
+
+    <div class="form group">
+        <!-- email form -->
+         <label for="email">Email Address</label>
+         <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email" />
+
+        <br/>
+        <!-- password1 form -->
+         <label for="password">Password</label>
+         <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password" />
+
+        <br/>
+        <!-- submit button -->
+         <div align="center">
+            <button class="btn btn-primary" type="submit">Login</button>
+         </div>
+    </div>
+</form>
+{%endblock %}
