@@ -1,0 +1,25 @@
+<!-- page extends to template.html -->
+{% extends "template.html" %} {% block title %} Create Post {% endblock %}
+
+<!-- login page content -->
+{% block content %}
+<h1> Make a Post</h1>
+
+    <form method="POST">
+        <!-- blog title form -->
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title" class="form-control" placeholder="Blog Title" />
+        <br/>
+        <!-- blog content text area -->
+        <textarea name="content" id="content" class="form-control"></textarea>
+    </form>
+    <br/>
+    <!-- submit button -->
+    <div align="center">
+        <button class="btn btn-primary" type="submit">Post</button>
+    </div>
+
+{% endblock %}
+
+
+
