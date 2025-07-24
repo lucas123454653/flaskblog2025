@@ -11,8 +11,12 @@ body {
 }
 
 h1, h2, h3, h4 {
-    color: #0056b3;
+  font-family: 'Montserrat', sans-serif;
+  color: #0056b3;
+  font-weight: 600;
 }
+
+
 
 .navbar {
     background-color: #004085;
@@ -95,3 +99,4 @@ body {
   background-position: center;  
   background-attachment: fixed; 
 }
+
