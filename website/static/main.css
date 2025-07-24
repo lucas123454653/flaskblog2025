@@ -1,3 +1,10 @@
 nav{
     background-color: #1291b8;
 }
+
+.article-img {
+  height: 65px;
+  width: 65px;
+  margin: 16px;
+
+}

@@ -1,3 +1,7 @@
+import os 
+from pathlib import Path
+from PIL import Image
+import secrets
 from flask_login import login_user, logout_user, login_required, current_user
 
 # import external libraries
@@ -176,3 +180,15 @@ def like(post_id):
         db.session.commit()
 
     return jsonify({"likes": len(post.likes), "liked": current_user.id in map(lambda x: x.author, post.likes)})
+
+#making profile pics random id
+def save_picture(form_picture):
+    path = Path("website/static/profile_pics")
+    random_hex = secrets.token_hex(8)
+    _,f_ext = os.path.splitext(form_picture.filename)
+    picture_fn = random_hex + f_ext
+    picture_path = os.path.join(path, picture_fn)
+    output_size = (125, 125)
+    i = Image.open(form_picture)
+    i.thumbnail(output_size)
+    i.save(picture_path)
