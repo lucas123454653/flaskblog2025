@@ -197,6 +197,7 @@ def save_picture(form_picture):
 
     return picture_fn
 
+# account page route
 @views.route("/account", methods=['GET', 'POST'])
 @login_required
 def account():
@@ -215,3 +216,7 @@ def account():
         form.email.data = current_user.email
     image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
     return render_template('account.html', user=current_user, image_file=image_file, form=form) 
+
+@views.route('/about')
+def about():
+    return render_template("about.html", user=current_user)
