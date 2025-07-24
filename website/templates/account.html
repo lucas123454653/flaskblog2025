@@ -4,74 +4,72 @@
 
 <!-- account page content -->
 {% block content %}
-<!-- display user profile picture and info -->
- <div class="content-section">
-        <div class="media">
-            <!-- User profile image -->
-            <img class="rounded-circle article-img" src="{{ image_file }}">
-            <div class="media">
-                <!-- Username and email display -->
-                <h2 class="account-heading">{{ current_user.username }}</h2>
-                <p class="text-secondary">{{ current_user.email }}</p>
+<div class="container mt-5 d-flex justify-content-center">
+  <div class="card shadow-sm p-4 w-100" style="max-width: 700px;">
+    
+    <!-- User info section -->
+    <div class="d-flex align-items-center mb-4">
+      <img src="{{ image_file }}" class="rounded-circle me-3" style="width: 80px; height: 80px; object-fit: cover;">
+      <div>
+        <h4 class="mb-0">{{ current_user.username }}</h4>
+        <small class="text-muted">{{ current_user.email }}</small>
+      </div>
+    </div>
+
+    <!-- Account update form -->
+    <form method="POST" enctype="multipart/form-data">
+      {{ form.hidden_tag() }}
+      <fieldset>
+        <legend class="border-bottom mb-4">Account Information</legend>
+
+        <!-- Username -->
+        <div class="mb-3">
+          {{ form.username.label(class="form-label") }}
+          {% if form.username.errors %}
+            {{ form.username(class="form-control is-invalid") }}
+            <div class="invalid-feedback">
+              {% for error in form.username.errors %}
+                {{ error }}
+              {% endfor %}
             </div>
+          {% else %}
+            {{ form.username(class="form-control") }}
+          {% endif %}
         </div>
 
-        <!-- Account update form -->
-        <form method="POST" action="" enctype="multipart/form-data">
-            <!-- CSRF protection hidden field -->
-            {{ form.hidden_tag() }}
-            <fieldset class="form-group">
-                <!-- Form legend/title -->
-                <legend class="border-bottom mb-4">Account Information</legend>
-
-                <!-- Username field with error handling -->
-                <div class="form-group">
-                    {{ form.username.label(class="form-control-label") }}
-                    {% if form.username.errors %}
-                        {{ form.username(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.username.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.username(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-
-                <!-- Email field with error handling -->
-                <div class="form-group">
-                    {{ form.email.label(class="form-control-label") }}
-                    {% if form.email.errors %}
-                        {{ form.email(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.email.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.email(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-
-                <!-- Profile picture upload field with error handling -->
-                <div class="form-group">
-                    {{ form.picture.label() }}
-                    {{ form.picture(class="form-control-file") }}
-                    {% if form.picture.errors %}
-                        {% for error in form.picture.errors %}
-                            <span class="text-danger">{{ error }}</span>
-                        {% endfor %}
-                    {% endif %}
-                </div>
-            </fieldset>
-
-            <br />
-
-            <!-- Submit button -->
-            <div class="form-group">
-                {{ form.submit(class="btn btn-outline-info") }}
+        <!-- Email -->
+        <div class="mb-3">
+          {{ form.email.label(class="form-label") }}
+          {% if form.email.errors %}
+            {{ form.email(class="form-control is-invalid") }}
+            <div class="invalid-feedback">
+              {% for error in form.email.errors %}
+                {{ error }}
+              {% endfor %}
             </div>
-        </form>
-    </div>
+          {% else %}
+            {{ form.email(class="form-control") }}
+          {% endif %}
+        </div>
+
+        <!-- Profile Picture -->
+        <div class="mb-3">
+          {{ form.picture.label(class="form-label") }}
+          {{ form.picture(class="form-control") }}
+          {% if form.picture.errors %}
+            {% for error in form.picture.errors %}
+              <div class="text-danger">{{ error }}</div>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </fieldset>
+
+      <!-- Submit Button -->
+      <div class="d-grid mt-4">
+        {{ form.submit(class="btn btn-outline-primary") }}
+      </div>
+    </form>
+
+  </div>
+</div>
 {% endblock %}
