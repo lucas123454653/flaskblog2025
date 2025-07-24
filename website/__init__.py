@@ -29,6 +29,7 @@ def create_app():
 
     with app.app_context():
         db.create_all()
+        print("Created Database!")
 
     login_manager = LoginManager()
     login_manager.login_view = "auth.login"
