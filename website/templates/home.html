@@ -1,9 +1,40 @@
-
 <!-- page extends to template.html -->
-{% extends "template.html" %} {% block title %} Home {% endblock %}
+{% extends "template.html" %} 
+{% block title %} Home {% endblock %}
 
-<!-- login page content -->
-{% block content %} <h1>Home</h1> {% endblock %}
+<!-- home page content -->
+{% block content %}
+<div class="content-section">
+  <div class="d-flex justify-content-center align-items-center flex-column text-center" style="min-height: 60vh;">
+    
+    
+    {% if current_user.is_authenticated %}
+      <div class="card shadow-sm p-4 mb-4 text-center" style="max-width: 500px; width: 100%;">
+        <h1 class="mb-3">Home</h1>
+        <div class="alert alert-success" role="alert">
+          Logged in as <strong>{{ current_user.username }}</strong>
+        </div>
 
+        <!-- whats shown when user is logged in-->
+        <p class="lead">What would you like to do?</p>
+        <ul class="list-unstyled mb-0">
+          <li class="mb-2"><a href="{{ url_for('views.account') }}" class="btn btn-outline-primary w-100">View or update your account</a></li>
+          <li class="mb-2"><a href="{{ url_for('views.blog') }}" class="btn btn-outline-success w-100">Create a new post</a></li>
+          <li><a href="{{ url_for('auth.logout') }}" class="btn btn-outline-danger w-100">Logout</a></li>
+        </ul>
+      </div>
+    
+    {% else %}
+      <!-- whats shown when user is not logged in-->
+      <div class="card shadow-sm p-4 mb-4 text-center" style="max-width: 500px; width: 100%;">
+        <h1 class="mb-3">Home</h1>
+        <div class="alert alert-info" role="alert">
+          You are not logged in.
+        </div>
+        <p class="lead">Please <a href="{{ url_for('auth.login') }}">Log In</a> or <a href="{{ url_for('auth.sign_up') }}">Sign Up</a> to access more features.</p>
+      </div>
+    {% endif %}
 
-
+  </div>
+</div>
+{% endblock %}
