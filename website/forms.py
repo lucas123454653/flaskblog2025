@@ -5,7 +5,13 @@ from wtforms import StringField, SubmitField, TextAreaField, PasswordField, Bool
 from wtforms.validators import DataRequired, Length, ValidationError, EqualTo, Email
 from .models import User
 
-
+class RegistrationForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired(), Length(min=2, max=20)])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    confirm_password = PasswordField('Confirm Password',
+    validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField('Sign Up')
 
 
 class PostForm(FlaskForm):
@@ -19,7 +25,7 @@ class UpdateAccountForm(FlaskForm):
     picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png'])])
     submit = SubmitField('Update')
 
-    def validate(self, username):
+    def validate_username(self, username):
         if username.data != current_user.username:
             user = User.query.filter_by(username=username.data).first()
             if user: 
