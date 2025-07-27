@@ -14,3 +14,13 @@ function like(postId) {
       })
       .catch((e) => alert("Could not like post."));
 }
+
+
+
+
+
+
+
+
+
+

@@ -1,29 +1,30 @@
 <!-- page extends to template.html -->
-{% extends "template.html" %} {% block title %} Create Post {% endblock %}
-<!-- login page content -->
+{% extends "template.html" %}
+{% block title %} Create Post {% endblock %}
+
 {% block content %}
+<div class="container mt-5 d-flex justify-content-center">
+    <div class="card shadow p-4" style="width: 100%; max-width: 600px;">
+        <h2 class="text-center mb-4">Make a Post</h2>
 
-    <h1 align="Center"> Make a Post</h1>
+        <form method="POST">
+            <!-- blog title form -->
+            <div class="form-group mb-3">
+                <label for="title">Post Title</label>
+                <input type="text" id="title" name="title" class="form-control" placeholder="Enter Title" />
+            </div>
 
-    <form method="POST">
-        <!-- blog title form -->
-        <label for="title">Post Title</label>
-        <input type="text" id="title" name="title" class="form-control" placeholder="Enter Title" />
-        <br/>
-        <!-- blog content text area -->
-         <label for="title">Post Content</label>
-        <textarea name="content" id="content" class="form-control"></textarea>
+            <!-- blog content text area -->
+            <div class="form-group mb-4">
+                <label for="content">Post Content</label>
+                <textarea name="content" id="content" class="form-control" rows="6" placeholder="Write your post..."></textarea>
+            </div>
 
-
-    <br/>
-    <!-- submit button -->
-    <div align="center">
-        <button class="btn btn-primary" type="Post">Post</button>
+            <!-- submit button -->
+            <div class="text-center">
+                <button class="btn btn-primary" type="submit">Post</button>
+            </div>
+        </form>
     </div>
-
-</form>
-
+</div>
 {% endblock %}
-
-
-
