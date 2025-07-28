@@ -12,7 +12,6 @@ from .models import User
 auth = Blueprint("auth", __name__)
 
 
-
 # sign up route
 @auth.route("/sign-up", methods=['GET', 'POST'])
 # sign up function
@@ -42,7 +41,8 @@ def sign_up():
         elif len(email) < 4:
             flash('Email is not valid', category='error')
         else:
-            new_user = User(email=email, username=username, password=generate_password_hash(password1, method='scrypt:32768:8:1'))
+            new_user = User(email=email, username=username, password=generate_password_hash(
+                password1, method='scrypt:32768:8:1'))
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user, remember=True)
@@ -52,6 +52,8 @@ def sign_up():
     return render_template("sign_up.html", user=current_user)
 
 # login route
+
+
 @auth.route("/login", methods=['GET', 'POST'])
 # login function
 # returns login page
@@ -76,10 +78,11 @@ def login():
         else:
             flash("Email does not exist!", category="error")
 
-
     return render_template("login.html", user=current_user)
 
 # logout route
+
+
 @auth.route("/logout")
 @login_required
 # logout function
